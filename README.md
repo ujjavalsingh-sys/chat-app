@@ -21,74 +21,74 @@ This is a simple chat app covering full stack of frontend and backend layers.
 
 
 ## Architecture
-+------------------------------------------------------+
-|                    Frontend (Client)                 |
-|------------------------------------------------------|
-| - Login Page                                         |
-| - Register Page                                      |
-| - Chat Room Page                                     |
-| - Chat Box Component                                 |
-| - Message List Component                             |
-| - Message Input Component                            |
-| - User List Component                                |
-| - Status Indicator                                   |
-| - API Client (REST)                                  |
-| - WebSocket Client                                   |
-+------------------------------------------------------+
-                          |
-                          | HTTP / WebSocket
-                          v
-+------------------------------------------------------+
-|                    Backend (Server)                  |
-|------------------------------------------------------|
-| - REST API Layer                                     |
-|     - /auth/login                                    |
-|     - /auth/register                                 |
-|     - /messages                                      |
-|     - /users                                         |
-|     - /chatrooms                                     |
-|                                                      |
-| - WebSocket Server                                   |
-|     - onConnect                                      |
-|     - onMessageSend                                  |
-|     - onMessageReceive                               |
-|     - onUserStatusChange                             |
-|                                                      |
-| - Controllers                                        |
-|     - AuthController                                 |
-|     - UserController                                 |
-|     - MessageController                              |
-|                                                      |
-| - Services                                           |
-|     - AuthService                                    |
-|     - ChatService                                    |
-|     - UserService                                    |
-|                                                      |
-| - Middleware                                         |
-|     - AuthMiddleware                                 |
-|     - RateLimiter                                    |
-|     - ErrorHandler                                   |
-+------------------------------------------------------+
-                          |
-          +---------------+----------------+
-          |                                |
-          v                                v
-+--------------------------+   +--------------------------+
-|     PostgreSQL Database  |   |        Redis Cache       |
-|--------------------------|   |--------------------------|
-| - users table            |   | - session store          |
-| - messages table         |   | - pub/sub channels       |
-| - chatrooms table        |   | - online user tracking   |
-| - chatroom_users table   |   | - rate limit counters    |
-+--------------------------+   +--------------------------+
+        +------------------------------------------------------+
+        |                    Frontend (Client)                 |
+        |------------------------------------------------------|
+        | - Login Page                                         |
+        | - Register Page                                      |
+        | - Chat Room Page                                     |
+        | - Chat Box Component                                 |
+        | - Message List Component                             |
+        | - Message Input Component                            |
+        | - User List Component                                |
+        | - Status Indicator                                   |
+        | - API Client (REST)                                  |
+        | - WebSocket Client                                   |
+        +------------------------------------------------------+
+                                |
+                                | HTTP / WebSocket
+                                v
+        +------------------------------------------------------+
+        |                    Backend (Server)                  |
+        |------------------------------------------------------|
+        | - REST API Layer                                     |
+        |     - /auth/login                                    |
+        |     - /auth/register                                 |
+        |     - /messages                                      |
+        |     - /users                                         |
+        |     - /chatrooms                                     |
+        |                                                      |
+        | - WebSocket Server                                   |
+        |     - onConnect                                      |
+        |     - onMessageSend                                  |
+        |     - onMessageReceive                               |
+        |     - onUserStatusChange                             |
+        |                                                      |
+        | - Controllers                                        |
+        |     - AuthController                                 |
+        |     - UserController                                 |
+        |     - MessageController                              |
+        |                                                      |
+        | - Services                                           |
+        |     - AuthService                                    |
+        |     - ChatService                                    |
+        |     - UserService                                    |
+        |                                                      |
+        | - Middleware                                         |
+        |     - AuthMiddleware                                 |
+        |     - RateLimiter                                    |
+        |     - ErrorHandler                                   |
+        +------------------------------------------------------+
+                                |
+                +---------------+----------------+
+                |                                |
+                v                                v
+        +--------------------------+   +--------------------------+
+        |     PostgreSQL Database  |   |        Redis Cache       |
+        |--------------------------|   |--------------------------|
+        | - users table            |   | - session store          |
+        | - messages table         |   | - pub/sub channels       |
+        | - chatrooms table        |   | - online user tracking   |
+        | - chatroom_users table   |   | - rate limit counters    |
+        +--------------------------+   +--------------------------+
 
-                          |
-                          v
-+------------------------------------------------------+
-|               Docker Compose Orchestration           |
-|------------------------------------------------------|
-| - frontend service                                   |
-| - backend service                                    |
-| - postgres service                                   |
-| - redis service                                      |
-+------------------------------------------------------+
+                                |
+                                v
+        +------------------------------------------------------+
+        |               Docker Compose Orchestration           |
+        |------------------------------------------------------|
+        | - frontend service                                   |
+        | - backend service                                    |
+        | - postgres service                                   |
+        | - redis service                                      |
+        +------------------------------------------------------+
