@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { generateToken, hashPassword, validatePassword } = require('./auth');
+const validateAuthToken = require('./authMiddleware');
 
 const users = [];
 
@@ -23,6 +24,11 @@ router.post('/login', async (req, res) => {
     }
     const token = generateToken(user);
     res.send({ token });
+});
+
+// protected route
+router.get('/profile', validateAuthToken, (req, res) => {
+    res.send({ user: req.user });
 });
 
 module.exports = router;
